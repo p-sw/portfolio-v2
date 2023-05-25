@@ -64,7 +64,7 @@ const theme = extendTheme({
           _light: "#050109",
         }
       },
-      wtext: {
+      wtext: { // reversed text, for text in a opposite background (e.g. dark mode, light background, dark text)
         100: {
           default: "#0501091C",
           _dark: "#0501091C",
