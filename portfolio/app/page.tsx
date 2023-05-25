@@ -22,11 +22,11 @@ export default function Page() {
         <THeading>Projects</THeading>
         <TText>&ldquo;Temporary failure becomes permanent only when one decides to quit trying and persevering.&rdquo; - Napoleon Hill</TText>
       </Block>
-      <Block spanH={1} spanW={1} secondary bradi={borderTr} lnk={"/skills"}>
+      <Block spanH={1} spanW={1} secondary bradi={borderTr} lnk={"/skills"} notAllowed>
         <THeading>Skills</THeading>
         <TText>&ldquo;What does not kill me makes me stronger.&rdquo; - Friedrich Nietzsche</TText>
       </Block>
-      <Block spanH={1} spanW={1} bradi={borderTl} lnk={"https://blog.sserve.work"}>
+      <Block spanH={1} spanW={1} bradi={borderTl} lnk={"https://blog.sserve.work"} notAllowed>
         <THeading>Blog</THeading>
         <TText>&ldquo;Records are the necessary link we must keep hold of our past experience, and push onward to improve.&rdquo; - Edmund Burke</TText>
       </Block>

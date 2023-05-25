@@ -2,8 +2,8 @@
 
 import React from "react";
 import {useRouter} from "next/navigation";
-import {GridItem, useColorModeValue, IconButton} from "@chakra-ui/react";
-import {BsFillArrowRightCircleFill} from "react-icons/bs";
+import {GridItem, useColorModeValue, IconButton, Icon, Box, Tooltip} from "@chakra-ui/react";
+import {BsFillArrowRightCircleFill, BsFillXCircleFill} from "react-icons/bs";
 
 interface BlockProps {
   children: React.ReactNode;
@@ -12,9 +12,10 @@ interface BlockProps {
   secondary?: boolean;
   lnk?: string;
   bradi?: "tl" | "tr" | "bl" | "br" | ("tl" | "tr" | "bl" | "br")[];
+  notAllowed?: boolean;
 }
 
-export default function Block({children, spanW, spanH, secondary, lnk, bradi}: BlockProps) {
+export default function Block({children, spanW, spanH, secondary, lnk, bradi, notAllowed}: BlockProps) {
   const text = useColorModeValue(secondary ? "text.1000" : "wtext.1000", "wtext.1000")
 
   const router = useRouter()
@@ -44,7 +45,9 @@ export default function Block({children, spanW, spanH, secondary, lnk, bradi}: B
   >
     {
       lnk
-        ? <IconButton aria-label={"Go to"} icon={<BsFillArrowRightCircleFill size={"40px"} />} bg={"transparent"} _hover={{bg: "transparent", pl: "20px", transition:"all 0.2s ease-out"}} onClick={onClickHandle} position={"absolute"} top={10} right={10} w={"60px"} pl={0} transition={"all 0.2s ease-out"} aspectRatio={1} verticalAlign={"left"} />
+        ? notAllowed
+          ? <Tooltip label={"Not Implemented Yet"}><Box as={"span"} w={"60px"} h={"40px"} position={"absolute"} top={10} right={10} px={"10px"}><Icon as={BsFillXCircleFill} width={"40px"} height={"40px"} size={"40px"} aspectRatio={1} /></Box></Tooltip>
+          : <IconButton aria-label={"Go to"} icon={<BsFillArrowRightCircleFill size={"40px"} />} bg={"transparent"} _hover={{bg: "transparent", pl: "20px", transition:"all 0.2s ease-out"}} onClick={onClickHandle} position={"absolute"} top={10} right={10} w={"60px"} pl={0} transition={"all 0.2s ease-out"} aspectRatio={1} verticalAlign={"left"} />
         : null
     }
     {children}
