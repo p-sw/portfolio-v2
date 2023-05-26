@@ -64,7 +64,7 @@ export default function Block({children, spanW, spanH, secondary, lnk, bradi, no
     {
       lnk
         ? notAllowed
-          ? <Tooltip label={"Not Implemented Yet"}><Box as={"span"} w={["30px", null, "60px"]} h={["30px", null, "40px"]} position={"absolute"} top={[1, null, 10]} right={[1, null, 10]} px={["0", null, "10px"]}><Icon as={BsFillXCircleFill} width={["30px", null, "40px"]} height={["30px", null, "40px"]} size={["30px", null, "40px"]} aspectRatio={1} /></Box></Tooltip>
+          ? <Tooltip label={"Not Implemented Yet"}><Box as={"span"} w={["30px", null, "60px"]} h={["30px", null, "40px"]} position={"absolute"} top={[1, null, 10]} right={[1, null, 10]} px={["0", null, "10px"]}><Icon as={BsFillXCircleFill} width={["30px", null, "40px"]} height={["30px", null, "40px"]} aspectRatio={1} /></Box></Tooltip>
           : <IconButton aria-label={"Go to"} icon={<BsFillArrowRightCircleFill size={rawSvgSize} />} bg={"transparent"} _hover={{bg: "transparent", pl: ["0", null, "20px"], transition:["none", null, "all 0.2s ease-out"]}} onClick={onClickHandle} position={"absolute"} top={[1, null, 10]} right={[1, null, 10]} w={["30px", null, "60px"]} pl={0} transition={"all 0.2s ease-out"} aspectRatio={1} verticalAlign={"left"} />
         : null
     }
