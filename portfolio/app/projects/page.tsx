@@ -202,7 +202,7 @@ export default function Projects() {
       <Project title={"Shylily Womp Counter"} github={"https://github.com/sserve-kr/womp"} setAppContent={setAppContent} setAppHref={setHref} setAppOpen={setAppOpen}>
         <Text>
           Womp sound, global counter.<br/>
-          It&amp;s working, but not online because I messed up it&amp;s nginx configuration.
+          It&apos;s working, but not online because I messed up it&apos;s nginx configuration.
         </Text>
       </Project>
       <Project title={"Stdict Word DB"} github={"https://github.com/sserve-kr/STDICT_WORD_DB"} setAppContent={setAppContent} setAppHref={setHref} setAppOpen={setAppOpen}>
