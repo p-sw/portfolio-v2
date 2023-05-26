@@ -95,15 +95,15 @@ function Project({ title, children, github, link, setAppContent, setAppHref, set
           }
         `}
       </style>
-      <Flex direction={"row"} justify={"space-between"} wrap={"wrap"} gap={1} w={"full"} aspectRatio={1} bg={"secondary.700"} backdropFilter={"auto"} backdropBlur={"2px"} borderRadius={"15%"} p={4} cursor={"pointer"} onClick={onOpen}>
-        <Icon as={AiFillInfoCircle} w={"45%"} h={"45%"} color={"wtext.1000"} />
+      <Grid gridTemplateColumns={"repeat(2, 45%)"} gridTemplateRows={"repeat(2, 45%)"} gap={1} w={"full"} aspectRatio={1} bg={"secondary.700"} backdropFilter={"auto"} backdropBlur={"2px"} borderRadius={"15%"} p={4} cursor={"pointer"} onClick={onOpen}>
+        <GridItem colSpan={1} rowSpan={1}><Icon as={AiFillInfoCircle} w={"full"} h={"full"} color={"wtext.1000"} /></GridItem>
         {
-          github ? <Icon as={AiFillGithub} w={"45%"} h={"45%"} color={"wtext.1000"} /> : null
+          github ? <GridItem colSpan={1} rowSpan={1}><Icon as={AiFillGithub} w={"full"} h={"full"} color={"wtext.1000"} /></GridItem> : null
         }
         {
-          link ? <SvgLinkIcon width={"45%"} height={"45%"} color={"var(--chakra-colors-wtext-1000)"} /> : null
+          link ? <GridItem colSpan={1} rowSpan={1}><SvgLinkIcon width={"full"} height={"full"} color={"var(--chakra-colors-wtext-1000)"} /></GridItem> : null
         }
-      </Flex>
+      </Grid>
       <Flex w={"100vw"} h={"100vh"} position={"fixed"} top={0} left={0} bg={"accent.500"} backdropFilter={"auto"} backdropBlur={"2px"} direction={"column"} justify={"center"} align={"center"} gap={12} onClick={onClose} zIndex={10} className={`proj-folder${isOpen ? " visible" : ""}`}>
         <Heading as={"h1"} color={"#fff"} textAlign={"center"} w={"full"} px={4}>{title}</Heading>
         <Flex direction={"row"} justify={"space-between"} wrap={"wrap"} gap={1} w={["50%", "30%", "20%"]} maxW={"250px"} aspectRatio={1} bg={"#fff"} borderRadius={"15%"} p={6} onClick={(e) => e.stopPropagation()}>
