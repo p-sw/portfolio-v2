@@ -2,8 +2,8 @@
 
 "use client"
 
-import React, {useEffect} from "react";
-import {Flex, Text, Icon, useDisclosure, Heading, useColorModeValue, Fade, Grid, GridItem} from "@chakra-ui/react";
+import React, {useEffect, useState} from "react";
+import {Flex, Text, Icon, useDisclosure, Heading, useColorModeValue, Grid, GridItem} from "@chakra-ui/react";
 import {AiFillInfoCircle, AiFillGithub} from "react-icons/ai";
 import {MdClose} from "react-icons/md";
 import {IconBaseProps} from "react-icons";
@@ -15,13 +15,16 @@ interface ProjectProps {
   children: React.ReactNode;
   github?: string;
   link?: string;
+  setAppOpen: () => void;
+  setAppContent: (content: React.ReactNode) => void;
+  setAppHref: (href?: string) => void;
 }
 
 interface AppProps {
   href?: string;
   children: React.ReactNode;
   appOpen: boolean;
-  appClose: (e: React.MouseEvent<SVGElement, MouseEvent>) => void;
+  appClose: () => void;
 }
 
 
@@ -49,7 +52,7 @@ function FullscreenApp({href, children, appOpen, appClose}: AppProps) {
 
   return <>
     <Flex w={"100vw"} h={"100vh"} position={"fixed"} top={0} left={0} bg={"background.1000"} direction={"column"} className={`proj ${isOpen ? "visible" : ""}`} zIndex={15}>
-      <Icon as={MdClose} position={"fixed"} top={4} right={4} w={8} h={8} color={"text.1000"} cursor={"pointer"} onClick={(e) => {onClose();appClose(e);}} />
+      <Icon as={MdClose} position={"fixed"} top={4} right={4} w={8} h={8} color={"text.1000"} cursor={"pointer"} onClick={() => {onClose();appClose();}} />
       <Flex w={"full"} h={"full"} p={12} justify={"center"} align={"center"} textAlign={"center"}>
         {href ? "Opening external link..." : children}
       </Flex>
@@ -58,9 +61,8 @@ function FullscreenApp({href, children, appOpen, appClose}: AppProps) {
 }
 
 
-function Project({ title, children, github, link }: ProjectProps) {
+function Project({ title, children, github, link, setAppContent, setAppHref, setAppOpen }: ProjectProps) {
   let { isOpen, onOpen, onClose } = useDisclosure();
-  let [appOpenStatus, setAppOpenStatus] = React.useState({0: false, 1: false, 2: false});
 
   const svgColor = useColorModeValue("text.1000", "wtext.1000");
   const rawSvgColor = useColorModeValue("var(--chakra-colors-text-1000)", "var(--chakra-colors-wtext-1000)");
@@ -81,6 +83,16 @@ function Project({ title, children, github, link }: ProjectProps) {
             transition: all 0.25s ease-in-out;
             pointer-events: all;
           }
+          .proj-folder {
+            opacity: 0;
+            transition: all 0.25s ease-in-out;
+            pointer-events: none;
+          }
+          .proj-folder.visible {
+            opacity: 1;
+            transition: all 0.25s ease-in-out;
+            pointer-events: all;
+          }
         `}
       </style>
       <Flex direction={"row"} justify={"space-between"} wrap={"wrap"} gap={1} w={"full"} aspectRatio={1} bg={"secondary.700"} backdropFilter={"auto"} backdropBlur={"2px"} borderRadius={"15%"} p={4} cursor={"pointer"} onClick={onOpen}>
@@ -92,65 +104,43 @@ function Project({ title, children, github, link }: ProjectProps) {
           link ? <SvgLinkIcon width={"1.8em"} height={"1.8em"} color={"var(--chakra-colors-wtext-1000)"} /> : null
         }
       </Flex>
-      <Fade in={isOpen} unmountOnExit>
-        <Flex w={"100vw"} h={"100vh"} position={"fixed"} top={0} left={0} bg={"accent.500"} backdropFilter={"auto"} backdropBlur={"2px"} direction={"column"} justify={"center"} align={"center"} gap={12} onClick={onClose} zIndex={10}>
-          <Heading as={"h1"} color={"#fff"} textAlign={"center"} w={"full"} px={4}>{title}</Heading>
-          <Flex direction={"row"} justify={"space-between"} wrap={"wrap"} gap={1} w={["50%", "30%", "20%"]} maxW={"250px"} aspectRatio={1} bg={"#fff"} borderRadius={"15%"} p={6}>
-            <Icon
-              as={AiFillInfoCircle}
-              w={"40%"}
-              h={"40%"}
-              color={svgColor}
-              cursor={"pointer"}
-              onClick={(e) => {e.stopPropagation();setAppOpenStatus(prev => ({...prev, 0: true}))}}
-            />
-            <FullscreenApp
-              appOpen={appOpenStatus[0]}
-              appClose={(e) => {e.stopPropagation();setAppOpenStatus(prev => ({...prev, 0: false}))}}
-            >
-              {children}
-            </FullscreenApp>
-            {
-              github
-                ? <>
-                  <Icon
-                    as={AiFillGithub}
-                    w={"40%"}
-                    h={"40%"}
-                    color={svgColor}
-                    cursor={"pointer"}
-                    onClick={(e) => {e.stopPropagation();setAppOpenStatus(prev => ({...prev, 1: true}))}} />
-                  <FullscreenApp
-                    appOpen={appOpenStatus[1]}
-                    href={github}
-                    appClose={(e) => {e.stopPropagation();setAppOpenStatus(prev => ({...prev, 1: false}))}}
-                  >
-                    github
-                  </FullscreenApp>
-                </> : null
-            }
-            {
-              link
-                ? <>
-                  <SvgLinkIcon
-                    width={"40%"}
-                    height={"40%"}
-                    color={rawSvgColor}
-                    cursor={"pointer"}
-                    onClick={(e) => {e.stopPropagation();setAppOpenStatus(prev => ({...prev, 2: true}))}}
-                  />
-                  <FullscreenApp
-                    appOpen={appOpenStatus[2]}
-                    href={link}
-                    appClose={(e) => {e.stopPropagation();setAppOpenStatus(prev => ({...prev, 2: false}))}}
-                  >
-                    Link
-                  </FullscreenApp>
-                </> : null
-            }
-          </Flex>
+      <Flex w={"100vw"} h={"100vh"} position={"fixed"} top={0} left={0} bg={"accent.500"} backdropFilter={"auto"} backdropBlur={"2px"} direction={"column"} justify={"center"} align={"center"} gap={12} onClick={onClose} zIndex={10} className={`proj-folder${isOpen ? " visible" : ""}`}>
+        <Heading as={"h1"} color={"#fff"} textAlign={"center"} w={"full"} px={4}>{title}</Heading>
+        <Flex direction={"row"} justify={"space-between"} wrap={"wrap"} gap={1} w={["50%", "30%", "20%"]} maxW={"250px"} aspectRatio={1} bg={"#fff"} borderRadius={"15%"} p={6} onClick={(e) => e.stopPropagation()}>
+          <Icon
+            as={AiFillInfoCircle}
+            w={"40%"}
+            h={"40%"}
+            color={svgColor}
+            cursor={"pointer"}
+            onClick={() => {setAppHref(undefined);setAppContent(children);setAppOpen()}}
+          />
+          {
+            github
+              ? <>
+                <Icon
+                  as={AiFillGithub}
+                  w={"40%"}
+                  h={"40%"}
+                  color={svgColor}
+                  cursor={"pointer"}
+                  onClick={() => {setAppHref(github);setAppOpen();}} />
+              </> : null
+          }
+          {
+            link
+              ? <>
+                <SvgLinkIcon
+                  width={"40%"}
+                  height={"40%"}
+                  color={rawSvgColor}
+                  cursor={"pointer"}
+                  onClick={() => {setAppHref(link);setAppOpen();}}
+                />
+              </> : null
+          }
         </Flex>
-      </Fade>
+      </Flex>
       <Text textAlign={"center"}>
         {title}
       </Text>
@@ -160,45 +150,64 @@ function Project({ title, children, github, link }: ProjectProps) {
 
 
 export default function Projects() {
-  return <Grid gridTemplateColumns={"repeat(auto-fit, minmax(var(--chakra-space-24), max-content))"} gridGap={6} w={"full"} p={12} justifyContent={"center"}>
-    <Project title={"Nyanlang"} github={"https://github.com/nyanlang/nyanlang"} link={"https://nyanlang.org"}>
-      <Text>
-        Nyanlang is a programming language highly inspired by the Brainfuck programming language.
-      </Text>
-    </Project>
-    <Project title={"Nyanlang Extension"} github={"https://github.com/nanlang/nyanlang-vscode-ext"}>
-      <Text>
-        VSCode syntax highlighting extension for Nyanlang.
-      </Text>
-    </Project>
-    <Project title={"DodgeGame"} github={"https://github.com/sserve-kr/DodgeGame"}>
-      <Text>
-        DodgeGame made for Bupyeong High School festival.<br/>
-        Leaderboard API backend is included in this project repository.<br/>
-        API backend is used by DodgeGameLeaderboard.
-      </Text>
-    </Project>
-    <Project title={"Dodge Game Leaderboard"} github={"https://github.com/sserve-kr/dodge-game-leaderboard"}>
-      <Text>
-        Leaderboard web app for DodgeGame.<br/>
-        Reading game data from API backend server, display it in frontend.
-      </Text>
-    </Project>
-    <Project title={"Simple Calculator"} github={"https://github.com/sserve-kr/simple-calculator"}>
-      <Text>
-        Simple calculator GUI written in Python, Pygame.
-      </Text>
-    </Project>
-    <Project title={"Shylily Womp Counter"} github={"https://github.com/sserve-kr/womp"}>
-      <Text>
-        Womp sound, global counter.<br/>
-        It&amp;s working, but not online because I messed up it&amp;s nginx configuration.
-      </Text>
-    </Project>
-    <Project title={"StdictWordDB"} github={"https://github.com/sserve-kr/STDICT_WORD_DB"}>
-      <Text>
-        Word database project, using Standard Korean Dictionary OpenAPI.
-      </Text>
-    </Project>
-  </Grid>
+  let [ {href, children, appOpen}, setAppState ] = useState<AppProps>({href: undefined, children: "", appOpen: false, appClose: () => {}});
+
+  function setAppContent(content: React.ReactNode) {
+    setAppState(prev => ({...prev, children: content}));
+  }
+
+  function setHref(content?: string) {
+    setAppState(prev => ({...prev, href: content}));
+  }
+
+  function setAppOpen() {
+    setAppState(prev => ({...prev, appOpen: true}));
+  }
+
+  return <>
+    <FullscreenApp appOpen={appOpen} href={href} appClose={() => setAppState(prev => ({...prev, appOpen: false}))}>
+      {children}
+    </FullscreenApp>
+    <Grid gridTemplateColumns={"repeat(auto-fit, minmax(var(--chakra-space-24), max-content))"} gridGap={6} w={"full"} p={12} justifyContent={"center"}>
+      <Project title={"Nyanlang"} github={"https://github.com/nyanlang/nyanlang"} link={"https://nyanlang.org"} setAppContent={setAppContent} setAppHref={setHref} setAppOpen={setAppOpen}>
+        <Text>
+          Nyanlang is a programming language highly inspired by the Brainfuck programming language.
+        </Text>
+      </Project>
+      <Project title={"Nyanlang Extension"} github={"https://github.com/nanlang/nyanlang-vscode-ext"} setAppContent={setAppContent} setAppHref={setHref} setAppOpen={setAppOpen}>
+        <Text>
+          VSCode syntax highlighting extension for Nyanlang.
+        </Text>
+      </Project>
+      <Project title={"DodgeGame"} github={"https://github.com/sserve-kr/DodgeGame"} setAppContent={setAppContent} setAppHref={setHref} setAppOpen={setAppOpen}>
+        <Text>
+          DodgeGame made for Bupyeong High School festival.<br/>
+          Leaderboard API backend is included in this project repository.<br/>
+          API backend is used by DodgeGameLeaderboard.
+        </Text>
+      </Project>
+      <Project title={"Dodge Game Leaderboard"} github={"https://github.com/sserve-kr/dodge-game-leaderboard"} setAppContent={setAppContent} setAppHref={setHref} setAppOpen={setAppOpen}>
+        <Text>
+          Leaderboard web app for DodgeGame.<br/>
+          Reading game data from API backend server, display it in frontend.
+        </Text>
+      </Project>
+      <Project title={"Simple Calculator"} github={"https://github.com/sserve-kr/simple-calculator"} setAppContent={setAppContent} setAppHref={setHref} setAppOpen={setAppOpen}>
+        <Text>
+          Simple calculator GUI written in Python, Pygame.
+        </Text>
+      </Project>
+      <Project title={"Shylily Womp Counter"} github={"https://github.com/sserve-kr/womp"} setAppContent={setAppContent} setAppHref={setHref} setAppOpen={setAppOpen}>
+        <Text>
+          Womp sound, global counter.<br/>
+          It&amp;s working, but not online because I messed up it&amp;s nginx configuration.
+        </Text>
+      </Project>
+      <Project title={"StdictWordDB"} github={"https://github.com/sserve-kr/STDICT_WORD_DB"} setAppContent={setAppContent} setAppHref={setHref} setAppOpen={setAppOpen}>
+        <Text>
+          Word database project, using Standard Korean Dictionary OpenAPI.
+        </Text>
+      </Project>
+    </Grid>
+  </>
 }
