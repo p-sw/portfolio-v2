@@ -67,8 +67,8 @@ function Project({ title, children, github, link, setAppContent, setAppHref, set
   const svgColor = useColorModeValue("text.1000", "wtext.1000");
   const rawSvgColor = useColorModeValue("var(--chakra-colors-text-1000)", "var(--chakra-colors-wtext-1000)");
 
-  return <GridItem colSpan={1} rowSpan={1}>
-    <Flex direction={"column"} align={"center"} gap={1} w={24}>
+  return <GridItem colSpan={1} rowSpan={1} display={"flex"} flexDirection={"row"} justifyContent={"center"} alignItems={"flex-start"}>
+    <Flex direction={"column"} align={"center"} gap={1} w={"full"} maxW={"100px"}>
       <style jsx global>
         {`
           .proj {
@@ -96,12 +96,12 @@ function Project({ title, children, github, link, setAppContent, setAppHref, set
         `}
       </style>
       <Flex direction={"row"} justify={"space-between"} wrap={"wrap"} gap={1} w={"full"} aspectRatio={1} bg={"secondary.700"} backdropFilter={"auto"} backdropBlur={"2px"} borderRadius={"15%"} p={4} cursor={"pointer"} onClick={onOpen}>
-        <Icon as={AiFillInfoCircle} w={"1.8em"} h={"1.8em"} color={"wtext.1000"} />
+        <Icon as={AiFillInfoCircle} w={"45%"} h={"45%"} color={"wtext.1000"} />
         {
-          github ? <Icon as={AiFillGithub} w={"1.8em"} h={"1.8em"} color={"wtext.1000"} /> : null
+          github ? <Icon as={AiFillGithub} w={"45%"} h={"45%"} color={"wtext.1000"} /> : null
         }
         {
-          link ? <SvgLinkIcon width={"1.8em"} height={"1.8em"} color={"var(--chakra-colors-wtext-1000)"} /> : null
+          link ? <SvgLinkIcon width={"45%"} height={"45%"} color={"var(--chakra-colors-wtext-1000)"} /> : null
         }
       </Flex>
       <Flex w={"100vw"} h={"100vh"} position={"fixed"} top={0} left={0} bg={"accent.500"} backdropFilter={"auto"} backdropBlur={"2px"} direction={"column"} justify={"center"} align={"center"} gap={12} onClick={onClose} zIndex={10} className={`proj-folder${isOpen ? " visible" : ""}`}>
@@ -168,7 +168,7 @@ export default function Projects() {
     <FullscreenApp appOpen={appOpen} href={href} appClose={() => setAppState(prev => ({...prev, appOpen: false}))}>
       {children}
     </FullscreenApp>
-    <Grid gridTemplateColumns={"repeat(auto-fit, minmax(var(--chakra-space-24), max-content))"} gridGap={6} w={"full"} p={12} justifyContent={"center"}>
+    <Grid gridTemplateColumns={"repeat(auto-fit, minmax(var(--chakra-space-24), 1fr))"} gridGap={6} w={"full"} p={[6, null, 12]} justifyContent={"center"}>
       <Project title={"Nyanlang"} github={"https://github.com/nyanlang/nyanlang"} link={"https://nyanlang.org"} setAppContent={setAppContent} setAppHref={setHref} setAppOpen={setAppOpen}>
         <Text>
           Nyanlang is a programming language highly inspired by the Brainfuck programming language.
@@ -203,7 +203,7 @@ export default function Projects() {
           It&amp;s working, but not online because I messed up it&amp;s nginx configuration.
         </Text>
       </Project>
-      <Project title={"StdictWordDB"} github={"https://github.com/sserve-kr/STDICT_WORD_DB"} setAppContent={setAppContent} setAppHref={setHref} setAppOpen={setAppOpen}>
+      <Project title={"Stdict Word DB"} github={"https://github.com/sserve-kr/STDICT_WORD_DB"} setAppContent={setAppContent} setAppHref={setHref} setAppOpen={setAppOpen}>
         <Text>
           Word database project, using Standard Korean Dictionary OpenAPI.
         </Text>

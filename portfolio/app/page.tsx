@@ -11,8 +11,8 @@ export default function Page() {
   const borderTr: "tr" | undefined = useBreakpointValue({base: undefined, md: "tr"})
   const borderTl: "tl" | undefined = useBreakpointValue({base: undefined, md: "tl"})
 
-  return <Flex w={"full"} minH={"calc(100vh - 80px)"} mt={[12, null, 0]} justify={"center"} align={"center"}>
-    <Grid w={"95%"} maxW={"600px"} m={"0 auto"} gridTemplateColumns={["100%", null, "repeat(2, 1fr)"]} aspectRatio={1} gridTemplateRows={["repeat(4, 1fr)", null, "repeat(2, 1fr)"]} gridGap={[6, null, 4]} userSelect={"none"}>
+  return <Flex w={"full"} h={"calc(100vh - 80px)"} justify={"center"} align={"center"}>
+    <Grid w={"95%"} maxW={"600px"} m={"0 auto"} gridTemplateColumns={"repeat(2, 1fr)"} aspectRatio={1} gridTemplateRows={"repeat(2, 1fr)"} gridGap={4} userSelect={"none"}>
       <Block spanH={1} spanW={1} bradi={borderBr}>
         <THeading>SSerVe</THeading>
         <TText>Ordinary student-like developer</TText>

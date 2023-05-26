@@ -16,9 +16,9 @@ const textFont = Poppins({
 })
 
 export function THeading({children}: {children: React.ReactNode}) {
-  return <Heading mb={4} className={`${headingFont.className}`} as={"h1"} size={"xl"}>{children}</Heading>
+  return <Heading mb={[1, 2, 4]} className={`${headingFont.className}`} as={"h1"} fontSize={["lg", null, "xl"]}>{children}</Heading>
 }
 
 export function TText({children}: {children: React.ReactNode}) {
-  return <Text mb={4} className={`${textFont.className}`}>{children}</Text>
+  return <Text mb={[1, 2, 4]} className={`${textFont.className}`} fontSize={["sm", null, "md"]}>{children}</Text>
 }
