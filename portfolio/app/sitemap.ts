@@ -34,7 +34,7 @@ async function blogPosts(): Promise<sitemapUrl[]> {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const pages = [
+  return [
     {
       url: url(),
       lastModified: new Date()
@@ -53,5 +53,4 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     ...(await blogPosts())
   ]
-  return pages
 }
