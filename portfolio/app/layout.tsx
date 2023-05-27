@@ -7,7 +7,7 @@ import {Metadata} from "next";
 
 export const metadata: Metadata = {
     title: "SSerVe's Workshop",
-    description: "This is SSerVe's Workshop, A full-stack web developer.",
+    description: "Workshop of a full-stack web developer - SSerVe.",
     manifest: "/site.webmanifest",
     icons: {
         apple: "/apple-touch-icon.png",
