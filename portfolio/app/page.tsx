@@ -22,7 +22,7 @@ export default function Page() {
         <THeading>Projects</THeading>
         <TText>&ldquo;Temporary failure becomes permanent only when one decides to quit trying and persevering.&rdquo; - Napoleon Hill</TText>
       </Block>
-      <Block spanH={1} spanW={1} secondary bradi={borderTr} lnk={"/skills"} notAllowed>
+      <Block spanH={1} spanW={1} secondary bradi={borderTr} lnk={"/skills"}>
         <THeading>Skills</THeading>
         <TText>&ldquo;What does not kill me makes me stronger.&rdquo; - Friedrich Nietzsche</TText>
       </Block>
