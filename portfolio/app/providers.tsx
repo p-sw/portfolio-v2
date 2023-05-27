@@ -168,6 +168,58 @@ const theme = extendTheme({
           _light: "#ecdbfb",
         }
       },
+      reversebg: {
+        100: {
+          default: "#ecdbfb1C",
+          _dark: "#ecdbfb1C",
+          _light: "#0a1a1a1C",
+        },
+        200: {
+          default: "#ecdbfb38",
+          _dark: "#ecdbfb38",
+          _light: "#0a1a1a38",
+        },
+        300: {
+          default: "#ecdbfb54",
+          _dark: "#ecdbfb54",
+          _light: "#0a1a1a54",
+        },
+        400: {
+          default: "#ecdbfb70",
+          _dark: "#ecdbfb70",
+          _light: "#0a1a1a70",
+        },
+        500: {
+          default: "#ecdbfb8c",
+          _dark: "#ecdbfb8c",
+          _light: "#0a1a1a8c",
+        },
+        600: {
+          default: "#ecdbfba8",
+          _dark: "#ecdbfba8",
+          _light: "#0a1a1aa8",
+        },
+        700: {
+          default: "#ecdbfbc4",
+          _dark: "#ecdbfbc4",
+          _light: "#0a1a1ac4",
+        },
+        800: {
+          default: "#ecdbfbe0",
+          _dark: "#ecdbfbe0",
+          _light: "#0a1a1ae0",
+        },
+        900: {
+          default: "#ecdbfbfc",
+          _dark: "#ecdbfbfc",
+          _light: "#0a1a1afc",
+        },
+        1000: {
+          default: "#ecdbfb",
+          _dark: "#ecdbfb",
+          _light: "#0a1a1a",
+        }
+      },
       primary: {
         100: {
           default: "#c563c41C",
@@ -335,6 +387,19 @@ const theme = extendTheme({
         bg: "background.1000",
         color: "text.1000",
         pt: "80px"
+      },
+      "::-webkit-scrollbar": {
+        width: "5px",
+        height: "5px",
+      },
+      "::-webkit-scrollbar-track": {
+        background: "reversebg.1000",
+      },
+      "::-webkit-scrollbar-thumb": {
+        background: "accent.1000"
+      },
+      "::-webkit-scrollbar-thumb:hover": {
+        background: "accent.500"
       }
     }
   }
