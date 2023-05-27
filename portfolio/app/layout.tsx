@@ -1,4 +1,4 @@
-// noinspection HtmlRequiredTitleElement
+// noinspection HtmlRequiredTitleElement,JSUnusedGlobalSymbols
 
 import Provider from '@/app/providers'
 import React from "react";
