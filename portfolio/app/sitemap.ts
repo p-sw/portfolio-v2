@@ -1,6 +1,6 @@
 import {MetadataRoute} from "next";
 
-function url(loc?: string) {
+export function url(loc?: string) {
     return (process.env.SITE_URL ?? "https://sserve.work/") + (loc ?? "")
 }
 
