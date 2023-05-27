@@ -18,6 +18,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
         {
             url: url("skills"),
             lastModified: new Date()
+        },
+        {
+            url: url("blog"),
+            lastModified: new Date()
         }
     ]
 }
