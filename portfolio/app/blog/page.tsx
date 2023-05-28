@@ -64,6 +64,7 @@ export default function Page() {
   let [searchInput, setSearchInput] = useState<string>("")
   let [searching, setSearchState] = useState<boolean>(false)
   let [posts, setPosts] = useState<Post[]>([])
+  let [firstSearch, setSearched] = useState<boolean>(false);
 
   const toaster = useToast()
 
@@ -100,6 +101,7 @@ export default function Page() {
     }).then(items => {
       setPosts(items)
       setSearchState(false);
+      setSearched(true);
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchInput, searching])
@@ -139,7 +141,10 @@ export default function Page() {
       }
       {
         posts.length <= 0 && searching
-          ? <><Spinner /></> : null
+          ? <Spinner /> : null
+      }
+      {
+        posts.length <= 0 && !searching && firstSearch ? <Text>Post Not Found.</Text> : null
       }
     </Flex>
   </Flex>
