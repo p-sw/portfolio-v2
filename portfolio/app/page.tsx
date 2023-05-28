@@ -26,7 +26,7 @@ export default function Page() {
         <THeading>Skills</THeading>
         <TText>&ldquo;What does not kill me makes me stronger.&rdquo; - Friedrich Nietzsche</TText>
       </Block>
-      <Block spanH={1} spanW={1} bradi={borderTl} lnk={"https://blog.sserve.work"}>
+      <Block spanH={1} spanW={1} bradi={borderTl} lnk={"/blog"}>
         <THeading>Blog</THeading>
         <TText>&ldquo;Records are the necessary link we must keep hold of our past experience, and push onward to improve.&rdquo; - Edmund Burke</TText>
       </Block>
