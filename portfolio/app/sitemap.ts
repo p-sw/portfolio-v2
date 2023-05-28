@@ -26,8 +26,10 @@ async function blogPosts(): Promise<sitemapUrl[]> {
     }
     let data = await apiRes.json()
     pageToken = data.pageToken
-    for (let item of data.items) {
-      newbase.push({url: url(`blog/${item.id}`), lastModified: new Date(item.updated)})
+    if (data.items && Array.isArray(data.items)) {
+      for (let item of data.items) {
+        newbase.push({url: url(`blog/${item.id}`), lastModified: new Date(item.updated)})
+      }
     }
     if (!pageToken) return newbase;
   }
