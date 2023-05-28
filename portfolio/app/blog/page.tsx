@@ -91,6 +91,8 @@ export default function Page() {
         return res.json()
       }
     }).then(data => {
+      if (!data.items || !Array.isArray(data.items)) return [];
+
       let items: Post[] = [];
 
       for (let item of data["items"]) {
