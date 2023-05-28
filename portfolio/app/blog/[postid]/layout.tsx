@@ -5,12 +5,8 @@ import {Metadata} from "next";
 import {JSDOM} from "jsdom";
 import PostData from "./posttype"
 
-type Props = {
-  params: { postid: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: {postid: string} }): Promise<Metadata> {
   if (!(/^\d+$/.test(params.postid))) {
     return {
       title: "Invalid PostID",

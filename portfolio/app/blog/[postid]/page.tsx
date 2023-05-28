@@ -32,8 +32,8 @@ const contentTitleFont = Nanum_Gothic({
   subsets: ["latin"]
 })
 
-function stylish({fontStyle, fontFamily, fontWeight}: {fontStyle: string, fontFamily: string, fontWeight: string}) {
-  return `font-style:${fontStyle};font-family:${fontFamily};font-weight:${fontWeight};`
+function stylish({fontStyle, fontFamily, fontWeight}: {fontFamily: string, fontWeight?: number, fontStyle?: string }) {
+  return `font-family:${fontFamily};${fontStyle ? "font-style:"+fontStyle+";" : ""}${fontWeight ? "font-weight:"+fontWeight+";" : ""}`
 }
 
 export default function PostView({params}: {params: {postid: string}}) {
