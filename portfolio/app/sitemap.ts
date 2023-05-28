@@ -31,7 +31,6 @@ async function blogPosts(): Promise<sitemapUrl[]> {
         newbase.push({url: url(`blog/${item.id}`), lastModified: new Date(item.updated)})
       }
     }
-    console.log(data)
     if (!pageToken) return newbase;
   }
 }
