@@ -1,34 +1,46 @@
 // noinspection JSUnusedGlobalSymbols
 
-import {MetadataRoute} from "next";
+import { MetadataRoute } from "next";
 
 export function url(loc?: string) {
-  return (process.env.SITE_URL ?? "https://sserve.work/") + (loc ?? "")
+  return (process.env.SITE_URL ?? "https://sserve.work/") + (loc ?? "");
 }
 
-const maxItemPerRequest = 2
+const maxItemPerRequest = 2;
 
 type sitemapUrl = {
-  url: string,
-  lastModified: Date
-}
+  url: string;
+  lastModified: Date;
+};
 
 async function blogPosts(): Promise<sitemapUrl[]> {
   let pageToken;
-  let newbase: sitemapUrl[] = []
+  let newbase: sitemapUrl[] = [];
 
   while (true) {
-    let apiRes = await fetch(`https://www.googleapis.com/blogger/v3/blogs/${process.env.BLOGGER_BLOG_ID}/posts?key=${process.env.BLOGGER_API_KEY}&maxResult=${maxItemPerRequest}${pageToken ? "&pageToken="+pageToken : ""}&status=live`, {
-      method: "GET"
-    })
+    let apiRes = await fetch(
+      `https://www.googleapis.com/blogger/v3/blogs/${
+        process.env.BLOGGER_BLOG_ID
+      }/posts?key=${
+        process.env.BLOGGER_API_KEY
+      }&maxResult=${maxItemPerRequest}${
+        pageToken ? "&pageToken=" + pageToken : ""
+      }&status=live`,
+      {
+        method: "GET",
+      }
+    );
     if (!apiRes.ok) {
-      return newbase
+      return newbase;
     }
-    let data = await apiRes.json()
-    pageToken = data.pageToken
+    let data = await apiRes.json();
+    pageToken = data.pageToken;
     if (data.items && Array.isArray(data.items)) {
       for (let item of data.items) {
-        newbase.push({url: url(`blog/${item.id}`), lastModified: new Date(item.updated)})
+        newbase.push({
+          url: url(`blog/${item.id}`),
+          lastModified: new Date(item.updated),
+        });
       }
     }
     if (!pageToken) return newbase;
@@ -39,20 +51,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     {
       url: url(),
-      lastModified: new Date()
+      lastModified: new Date(),
     },
     {
       url: url("projects"),
-      lastModified: new Date()
+      lastModified: new Date(),
     },
     {
       url: url("skills"),
-      lastModified: new Date()
+      lastModified: new Date(),
     },
     {
       url: url("blog"),
-      lastModified: new Date()
+      lastModified: new Date(),
     },
-    ...(await blogPosts())
-  ]
+    ...(await blogPosts()),
+  ];
 }
