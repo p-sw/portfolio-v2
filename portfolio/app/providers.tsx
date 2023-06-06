@@ -1,13 +1,11 @@
-'use client'
+"use client";
 
-import { CacheProvider } from '@chakra-ui/next-js'
-import {ChakraProvider, ColorModeScript, extendTheme} from '@chakra-ui/react'
+import { CacheProvider } from "@chakra-ui/next-js";
+import { ChakraProvider, ColorModeScript, extendTheme } from "@chakra-ui/react";
 import React from "react";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-
-const queryClient = new QueryClient()
-
+const queryClient = new QueryClient();
 
 const theme = extendTheme({
   config: {
@@ -66,9 +64,10 @@ const theme = extendTheme({
           default: "#daf1f1",
           _dark: "#daf1f1",
           _light: "#050109",
-        }
+        },
       },
-      wtext: { // reversed text, for text in a opposite background (e.g. dark mode, light background, dark text)
+      wtext: {
+        // reversed text, for text in a opposite background (e.g. dark mode, light background, dark text)
         100: {
           default: "#0501091C",
           _dark: "#0501091C",
@@ -118,7 +117,7 @@ const theme = extendTheme({
           default: "#050109",
           _dark: "#050109",
           _light: "#daf1f1",
-        }
+        },
       },
       background: {
         100: {
@@ -170,7 +169,7 @@ const theme = extendTheme({
           default: "#0a1a1a",
           _dark: "#0a1a1a",
           _light: "#ecdbfb",
-        }
+        },
       },
       reversebg: {
         100: {
@@ -222,7 +221,7 @@ const theme = extendTheme({
           default: "#ecdbfb",
           _dark: "#ecdbfb",
           _light: "#0a1a1a",
-        }
+        },
       },
       primary: {
         100: {
@@ -274,7 +273,7 @@ const theme = extendTheme({
           default: "#c563c4",
           _dark: "#c563c4",
           _light: "#470f76",
-        }
+        },
       },
       secondary: {
         100: {
@@ -326,7 +325,7 @@ const theme = extendTheme({
           default: "#e8f8de",
           _dark: "#e8f8de",
           _light: "#dcafff",
-        }
+        },
       },
       accent: {
         100: {
@@ -378,19 +377,19 @@ const theme = extendTheme({
           default: "#691736",
           _dark: "#691736",
           _light: "#55118d",
-        }
-      }
-    }
+        },
+      },
+    },
   },
   styles: {
     global: {
       "html,body": {
-        minH: "100vh"
+        minH: "100vh",
       },
       body: {
         bg: "background.1000",
         color: "text.1000",
-        pt: "80px"
+        pt: "80px",
       },
       "::-webkit-scrollbar": {
         width: "5px",
@@ -400,30 +399,22 @@ const theme = extendTheme({
         background: "reversebg.1000",
       },
       "::-webkit-scrollbar-thumb": {
-        background: "accent.1000"
+        background: "accent.1000",
       },
       "::-webkit-scrollbar-thumb:hover": {
-        background: "accent.500"
-      }
-    }
-  }
-})
+        background: "accent.500",
+      },
+    },
+  },
+});
 
-
-
-export default function Providers({
-    children
-  }: {
-  children: React.ReactNode
-  }) {
+export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <CacheProvider>
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-        <ChakraProvider theme={theme}>
-          {children}
-        </ChakraProvider>
+        <ChakraProvider theme={theme}>{children}</ChakraProvider>
       </CacheProvider>
     </QueryClientProvider>
-  )
+  );
 }
