@@ -41,7 +41,7 @@ export default function Page() {
         userSelect={"none"}
       >
         <Block spanH={1} spanW={1} bradi={borderBr}>
-          <THeading>SSerVe</THeading>
+          <THeading>Ritonis</THeading>
           <TText>Ordinary student-like developer</TText>
           <TText>Currently working in DevBench Team</TText>
         </Block>

@@ -383,7 +383,7 @@ export default function Projects() {
         </Project>
         <Project
           title={"DodgeGame"}
-          github={"https://github.com/sserve-kr/DodgeGame"}
+          github={"https://github.com/ritonis/DodgeGame"}
           setAppContent={setAppContent}
           setAppHref={setHref}
           setAppOpen={setAppOpen}
@@ -398,7 +398,7 @@ export default function Projects() {
         </Project>
         <Project
           title={"Dodge Game Leaderboard"}
-          github={"https://github.com/sserve-kr/dodge-game-leaderboard"}
+          github={"https://github.com/ritonis/dodge-game-leaderboard"}
           setAppContent={setAppContent}
           setAppHref={setHref}
           setAppOpen={setAppOpen}
@@ -411,7 +411,7 @@ export default function Projects() {
         </Project>
         <Project
           title={"Simple Calculator"}
-          github={"https://github.com/sserve-kr/simple-calculator"}
+          github={"https://github.com/ritonis/simple-calculator"}
           setAppContent={setAppContent}
           setAppHref={setHref}
           setAppOpen={setAppOpen}
@@ -420,7 +420,7 @@ export default function Projects() {
         </Project>
         <Project
           title={"Shylily Womp Counter"}
-          github={"https://github.com/sserve-kr/womp"}
+          github={"https://github.com/ritonis/womp"}
           setAppContent={setAppContent}
           setAppHref={setHref}
           setAppOpen={setAppOpen}
@@ -434,7 +434,7 @@ export default function Projects() {
         </Project>
         <Project
           title={"Stdict Word DB"}
-          github={"https://github.com/sserve-kr/STDICT_WORD_DB"}
+          github={"https://github.com/ritonis/STDICT_WORD_DB"}
           setAppContent={setAppContent}
           setAppHref={setHref}
           setAppOpen={setAppOpen}
