@@ -59,7 +59,7 @@ export default function Page() {
             Nietzsche
           </TText>
         </Block>
-        <Block spanH={1} spanW={1} bradi={borderTl} lnk={"/blog"}>
+        <Block spanH={1} spanW={1} bradi={borderTl} lnk={"/"}>
           <THeading>Blog</THeading>
           <TText>
             &ldquo;Records are the necessary link we must keep hold of our past
