@@ -1,4 +1,4 @@
-import PostData from "@/app/blog/[postid]/posttype";
+import PostData from "@/app/_blog/[postid]/posttype";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
